@@ -4,11 +4,11 @@ import styled from 'styled-components';
 
 const Button = styled.button`
   border: 1px solid #e1a904;
-  border-radius: .28571429rem;
+  border-radius: .25rem;
   background-color: #fbbd08;
-  min-height: 1em;
+  min-height: 1rem;
   margin: ${props => props.topBotMargin}em ${props => props.leftRightMargin}em;
-  padding: .78571429em 1.5em .78571429em;
+  padding: .75rem 1.5rem .75rem;
   font-family: 'Lato','Helvetica Neue', 'Arial', 'Helvetica', sans-serif;
   color: #fff;
   font-size: ${props => props.fontSize};
@@ -20,7 +20,12 @@ const Button = styled.button`
 `;
 
 const SharedButton = (props) => (
-  <Button size={props.size} leftRightMargin={props.leftRightMargin || 0} topBotMargin={props.topBotMargin || 0}>
+  <Button
+    leftRightMargin={props.leftRightMargin || 0}
+    topBotMargin={props.topBotMargin || 0}
+    type={props}
+    size={props.size}
+  >
     {props.title}
   </Button>
 )

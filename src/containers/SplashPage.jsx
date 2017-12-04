@@ -21,7 +21,10 @@ class SplashPage extends Component {
     return (
       <StyledFlex >
         <NavBar />
-        <TextBox size="3" text="No Meat May"/>
+        <TextBox
+          size="3"
+          text="No Meat May"
+        />
         <div>
           <Picture
             source="https://australianmuseum.net.au/uploads/images/1955/barramundi%20cod%20477-6_medium.jpg"

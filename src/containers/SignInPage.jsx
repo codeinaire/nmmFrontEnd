@@ -42,7 +42,7 @@ class SignInPage extends Component {
             margin="1"
           />
         </Link>
-      </StyledFlex >
+      </StyledFlex>
     );
   }
 }
