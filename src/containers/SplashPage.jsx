@@ -2,11 +2,11 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { graphql } from 'react-apollo';
 import gql from 'graphql-tag';
+import styled from 'styled-components';
 import Button from '../sharedPresentational/SharedButton';
 import NavBar from '../sharedPresentational/SharedNavBar';
 import Picture from '../sharedPresentational/SharedPicture';
 import TextBox from '../sharedPresentational/SharedTextBox';
-import styled from 'styled-components';
 
 export const StyledFlex = styled.div`
   display: flex;
@@ -14,7 +14,7 @@ export const StyledFlex = styled.div`
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-`
+`;
 
 class SplashPage extends Component {
   render() {
@@ -58,7 +58,7 @@ class SplashPage extends Component {
             margin="1"
           />
         </Link>
-      </StyledFlex >
+      </StyledFlex>
     );
   }
 }

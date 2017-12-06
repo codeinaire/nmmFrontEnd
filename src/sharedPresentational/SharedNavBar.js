@@ -1,3 +1,4 @@
+// @flow
 import React from 'react';
 import styled from 'styled-components';
 import LinkedButton from './SharedButton';
@@ -16,6 +17,6 @@ const SharedNavBar = () => (
     <LinkedButton title="I'm a linked button 1" leftRightMargin="1" />
     <LinkedButton title="I'm a linked button 2" leftRightMargin="1" />
   </StyledNav>
-)
+);
 
 export default SharedNavBar;

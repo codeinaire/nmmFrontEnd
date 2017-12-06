@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import styled from 'styled-components';
 import { StyledFlex } from './SplashPage';
 import Button from '../sharedPresentational/SharedButton';
 import NavBar from '../sharedPresentational/SharedNavBar';
-import Picture from '../sharedPresentational/SharedPicture';
 import TextBox from '../sharedPresentational/SharedTextBox';
 import InputField from '../sharedPresentational/SharedInputField';
 

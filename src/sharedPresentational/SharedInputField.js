@@ -1,5 +1,5 @@
+// @flow
 import React from 'react';
-import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 const StyledLabel = styled.label`
@@ -10,7 +10,7 @@ const StyledLabel = styled.label`
 
 const StyledInput = styled.input.attrs({
   type: props => props.type,
-  name: props => props.name
+  name: props => props.name,
 })`
   padding: 0.5rem;
   margin: 0.5rem;
@@ -24,18 +24,22 @@ const StyledInput = styled.input.attrs({
   font-family: 'Lato','Helvetica Neue', 'Arial', 'Helvetica', sans-serif;
 `;
 
-const SharedInputField = (props) => (
+type Props = {
+  label: string,
+  placeholder: string,
+  type: string,
+  name: string,
+}
+
+const SharedInputField = (props: Props) => (
   <StyledLabel >
     {props.label}
-    <StyledInput placeholder={props.placeholder} type={props.type} name={props.name}/>
+    <StyledInput
+      placeholder={props.placeholder}
+      type={props.type}
+      name={props.name}
+    />
   </StyledLabel>
-)
-
-SharedInputField.propTypes = {
-  label: PropTypes.string.isRequired,
-  placeholder: PropTypes.string.isRequired,
-  type: PropTypes.string.isRequired,
-  name: PropTypes.string.isRequired,
-}
+);
 
 export default SharedInputField;

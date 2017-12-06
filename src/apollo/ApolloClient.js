@@ -12,10 +12,11 @@ const httpLink = new HttpLink({
 
 const client = new ApolloClient({
   link: httpLink,
-  cache: new InMemoryCache()
+  cache: new InMemoryCache(),
 });
 
-const whatever = client.query({ query: gql`{ user {
+const whatever = client.query({
+  query: gql`{ user {
     id
     name
     username

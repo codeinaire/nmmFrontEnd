@@ -1,5 +1,5 @@
+//  @flow
 import React from 'react';
-import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 const StyledText = styled.h2.attrs({
@@ -20,7 +20,14 @@ const StyledText = styled.h2.attrs({
   font-size: ${props => props.fontSize}rem;
 `;
 
-const SharedTextBox = (props) => (
+type Props = {
+  text: string,
+  size: string,
+  backgroundColour: string,
+  textColour: string
+}
+
+const SharedTextBox = (props: Props) => (
   <StyledText
     size={props.size}
     backgroundColour={props.backgroundColour}
@@ -28,13 +35,6 @@ const SharedTextBox = (props) => (
   >
     {props.text}
   </StyledText>
-)
-
-SharedTextBox.propTypes = {
-  text: PropTypes.string.isRequired,
-  size: PropTypes.string,
-  backgroundColour: PropTypes.string,
-  textColour: PropTypes.string,
-}
+);
 
 export default SharedTextBox;

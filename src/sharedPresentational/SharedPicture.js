@@ -1,22 +1,27 @@
+//  @flow
 import React from 'react';
-import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 const StyledImage = styled.img`
-  border: 5px solid #e1a904;
-  border-radius: .28571429rem;
+  border: .5rem solid #e1a904;
+  border-radius: .25rem;
   margin: 0rem 2rem;
-`
+`;
 
-const SharedPicture = (props) => (
-  <StyledImage src={props.source} alt={props.alt} height={props.height} width={props.width}/>
-)
-
-SharedPicture.propTypes = {
-  source: PropTypes.string.isRequired,
-  alt: PropTypes.string.isRequired,
-  height: PropTypes.string,
-  width: PropTypes.string,
+type Props = {
+  source: string,
+  alt: string,
+  height: string,
+  width: string,
 }
+
+const SharedPicture = (props: Props) => (
+  <StyledImage
+    src={props.source}
+    alt={props.alt}
+    height={props.height}
+    width={props.width}
+  />
+);
 
 export default SharedPicture;

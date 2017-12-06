@@ -1,0 +1,36 @@
+{
+  "extends": [
+    "airbnb",
+    "plugin:flowtype/recommended"
+  ],
+  "rules": {
+    "react/jsx-wrap-multilines": [1],
+    "react/jsx-no-bind": "error",
+    "react/no-unescaped-entities": [0],
+    "max-len": [1, 150],
+    "no-debugger": "warn",
+    "no-plusplus": 0,
+    "import/prefer-default-export": 0,
+    "jest/no-disabled-tests": "warn",
+    "jest/no-focused-tests": "error",
+    "jest/no-identical-title": "error",
+    "jest/valid-expect": "error",
+    "import/no-extraneous-dependencies": ["error", {"devDependencies": ["**/*.spec.js", "src/__test__/setupTests.js"]}],
+    "react/jsx-filename-extension": 0,
+    "react/prefer-stateless-function": 0,
+    "compat/compat": 2,
+    "no-mixed-operators": 0,
+    "react/no-array-index-key": 0
+  },
+  "env": {
+    "browser": true,
+    "jest/globals": true,
+    "jest": true
+  },
+  "parser": "babel-eslint",
+  "plugins": [
+    "jest",
+    "flowtype",
+    "compat"
+  ]
+}

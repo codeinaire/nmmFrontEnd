@@ -1,5 +1,5 @@
+// @flow
 import React from 'react';
-import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 const Button = styled.button`
@@ -19,7 +19,14 @@ const Button = styled.button`
   }
 `;
 
-const SharedButton = (props) => (
+type Props = {
+  title: string,
+  size: string,
+  leftRightMargin: string,
+  topBotMargin: string,
+}
+
+const SharedButton = (props: Props) => (
   <Button
     leftRightMargin={props.leftRightMargin || 0}
     topBotMargin={props.topBotMargin || 0}
@@ -28,13 +35,7 @@ const SharedButton = (props) => (
   >
     {props.title}
   </Button>
-)
+);
 
-SharedButton.propTypes = {
-  title: PropTypes.string.isRequired,
-  size: PropTypes.string,
-  lefRightmargin: PropTypes.string,
-  topBotMargin: PropTypes.string,
-}
 
 export default SharedButton;
