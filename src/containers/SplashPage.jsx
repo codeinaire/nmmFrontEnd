@@ -1,7 +1,6 @@
+// @flow
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { graphql } from 'react-apollo';
-import gql from 'graphql-tag';
 import styled from 'styled-components';
 import Button from '../sharedPresentational/SharedButton';
 import NavBar from '../sharedPresentational/SharedNavBar';
@@ -18,6 +17,13 @@ export const StyledFlex = styled.div`
 
 class SplashPage extends Component {
   render() {
+    const splashPagePictures = [
+      'https://australianmuseum.net.au/uploads/images/1955/barramundi%20cod%20477-6_medium.jpg',
+      'https://australianmuseum.net.au/uploads/images/1955/barramundi%20cod%20477-6_medium.jpg',
+      'https://australianmuseum.net.au/uploads/images/1955/barramundi%20cod%20477-6_medium.jpg',
+      'https://australianmuseum.net.au/uploads/images/1955/barramundi%20cod%20477-6_medium.jpg',
+    ];
+
     return (
       <StyledFlex >
         <NavBar />
@@ -26,30 +32,13 @@ class SplashPage extends Component {
           text="No Meat May"
         />
         <div>
-          <Picture
-            source="https://australianmuseum.net.au/uploads/images/1955/barramundi%20cod%20477-6_medium.jpg"
-            alt="this is a fish"
-            height="250px"
-            width="250px"
-          />
-          <Picture
-            source="https://australianmuseum.net.au/uploads/images/1955/barramundi%20cod%20477-6_medium.jpg"
-            alt="this is a fish"
-            height="250px"
-            width="250px"
-          />
-          <Picture
-            source="https://australianmuseum.net.au/uploads/images/1955/barramundi%20cod%20477-6_medium.jpg"
-            alt="this is a fish"
-            height="250px"
-            width="250px"
-          />
-          <Picture
-            source="https://australianmuseum.net.au/uploads/images/1955/barramundi%20cod%20477-6_medium.jpg"
-            alt="this is a fish"
-            height="250px"
-            width="250px"
-          />
+          {splashPagePictures.map((picture: string) =>
+              (<Picture
+                source={picture}
+                alt="this is a fish"
+                height="250px"
+                width="250px"
+              />))}
         </div>
         <Link to="/signup">
           <Button
