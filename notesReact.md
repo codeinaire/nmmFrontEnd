@@ -7,6 +7,9 @@
 
 - [Graphql-request](https://github.com/graphcool/graphql-request) - very basic graphql client.
 
+- [Flow](https://flow.org/en/docs/config/) - static type checker for JS
+- [eslint](https://eslint.org/) - linting utility JS
+
 # Different component types
 
 https://www.peterbe.com/plog/4-different-kinds-of-react-component-styles
@@ -19,3 +22,5 @@ https://www.peterbe.com/plog/4-different-kinds-of-react-component-styles
 # Resources
 
 - [Graphql React Apollo Tute](https://www.howtographql.com/react-apollo/0-introduction/)
+
+- [Best way to get key out of object](https://stackoverflow.com/questions/6268679/best-way-to-get-the-key-of-a-key-value-javascript-object)

@@ -8,14 +8,14 @@ const StyledImage = styled.img`
   margin: 0rem 2rem;
 `;
 
-type Props = {
+type PropsType = {
   source: string,
   alt: string,
   height: string,
   width: string,
 }
 
-const SharedPicture = (props: Props) => (
+const SharedPicture = (props: PropsType) => (
   <StyledImage
     src={props.source}
     alt={props.alt}

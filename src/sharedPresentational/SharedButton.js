@@ -2,6 +2,8 @@
 import React from 'react';
 import styled from 'styled-components';
 
+// may need to use type="button" to build custom button in react
+
 const Button = styled.button`
   border: 1px solid #e1a904;
   border-radius: .25rem;
@@ -29,9 +31,9 @@ type Props = {
 const SharedButton = (props: Props) => (
   <Button
     leftRightMargin={props.leftRightMargin || 0}
+    size={props.size}
     topBotMargin={props.topBotMargin || 0}
     type={props}
-    size={props.size}
   >
     {props.title}
   </Button>
