@@ -3,12 +3,12 @@ import React from 'react';
 import styled from 'styled-components';
 
 const StyledText = styled.h2.attrs({
-  backgroundColour: props => props.backgroundColour || '#646fe2',
+  backgroundcolour: props => props.backgroundcolour || '#646fe2',
   fontSize: props => props.size || '1rem',
   textColour: props => props.textColour || '#000',
 })`
   align-self: center;
-  background-color: ${props => props.backgroundColour};
+  background-color: ${props => props.backgroundcolour};
   border: 1px solid;
   border-radius: .25rem;
   color: ${props => props.textColour};
@@ -21,7 +21,7 @@ const StyledText = styled.h2.attrs({
 `;
 
 type PropsType = {
-  backgroundColour: string,
+  backgroundcolour: string,
   text: string,
   textColour: string,
   size: string,
@@ -29,7 +29,7 @@ type PropsType = {
 
 const SharedTextBox = (props: PropsType) => (
   <StyledText
-    backgroundColour={props.backgroundColour}
+    backgroundcolour={props.backgroundcolour}
     size={props.size}
     textColour={props.textColour}
   >

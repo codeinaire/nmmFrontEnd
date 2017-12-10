@@ -2,6 +2,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import gql from 'graphql-tag';
+import { graphql } from 'react-apollo';
 // might need to reconsider importing this from another file as it's important for responsiveness and may need to be in this file
 import { StyledFlex } from './SplashPage';
 import Button from '../sharedPresentational/SharedButton';
@@ -39,7 +41,20 @@ type MotivationObjectType = {
   motivation: string,
 }
 
-const SignUpPage = () => {
+const SignUpPage = (props) => {
+
+  function handleSubmit(event) {
+    event.preventDefault();
+    const form = event.target;
+    const data = new FormData(form);
+    const formData = data.get('username');
+    // console.log('this is data', stringifyFormData(data));
+    console.log('this is event', formData);
+    props.mutate({
+      variables: { username: data.get('username') },
+    });
+  }
+
   const motiveToJoin = [
     { environment: 'Environment' },
     { animal: 'Animal Welfare' },
@@ -58,10 +73,10 @@ const SignUpPage = () => {
       <TextBox
         size="2"
         text="Change your diet, change the world. Sign-up now!"
-        backgroundColour="#fbbd08"
+        backgroundcolour="#fbbd08"
         textColour="#fff"
       />
-      <form action="/URL-where-it's-sent" method="post">
+      <form onSubmit={handleSubmit}>
         <InputField
           ariaLabel="Username"
           labelFor="userName"
@@ -110,6 +125,7 @@ const SignUpPage = () => {
             {motiveToJoin.map((motivation: MotivationObjectType) =>
               (
                 <MotiveOption
+                  key={Object.keys(motivation)[0]}
                   ariaLabel={motivation[Object.keys(motivation)[0]]}
                   value={Object.keys(motivation)[0]}
                 >
@@ -118,16 +134,34 @@ const SignUpPage = () => {
               ))}
           </MotiveDropdown>
         </DropdownWrapper>
-        <Link to="/signin">
-          <Button
-            title="Let's Get Started"
-            size="1"
-            margin="5"
-          />
-        </Link>
+        <Button
+          title="Let's Get Started"
+          size="1"
+          margin="5"
+        />
       </form>
     </StyledFlex>
   );
 };
 
-export default SignUpPage;
+// <Link to="/signin">
+// </Link>
+const submitSignupDetails = gql`
+  mutation submitSignupDetails($username: String!) {
+    submitSignupDetails(username: $username){
+      username
+    }
+  }
+`;
+
+const SignUpPageRequest = graphql(submitSignupDetails)(SignUpPage);
+
+// function stringifyFormData(fd) {
+//   const data = {};
+// for (let key of fd.keys()) {
+//   data[key] = fd.get(key);
+//   }
+//   return JSON.stringify(data, null, 2);
+// }
+
+export default SignUpPageRequest;

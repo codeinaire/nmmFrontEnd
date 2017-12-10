@@ -33,7 +33,6 @@ const SharedButton = (props: Props) => (
     leftRightMargin={props.leftRightMargin || 0}
     size={props.size}
     topBotMargin={props.topBotMargin || 0}
-    type={props}
   >
     {props.title}
   </Button>
