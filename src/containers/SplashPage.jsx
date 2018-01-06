@@ -32,8 +32,9 @@ class SplashPage extends Component {
           text="No Meat May"
         />
         <div>
-          {splashPagePictures.map((picture: string) =>
+          {splashPagePictures.map((picture: string, index: number) =>
               (<Picture
+                key={index}
                 source={picture}
                 alt="this is a fish"
                 height="250px"

@@ -24,3 +24,19 @@ https://www.peterbe.com/plog/4-different-kinds-of-react-component-styles
 - [Graphql React Apollo Tute](https://www.howtographql.com/react-apollo/0-introduction/)
 
 - [Best way to get key out of object](https://stackoverflow.com/questions/6268679/best-way-to-get-the-key-of-a-key-value-javascript-object)
+
+# HELP
+
+
+### FORM DATA
+- Another way to iterate through form data and create an object:
+```
+function stringifyFormData(fd) {
+  const data = {};
+  for (let key of fd.keys()) {
+    data[key] = fd.get(key);
+    }
+  return JSON.stringify(data, null, 2);
+}
+```
+With the form data coming from this: `const data = new FormData(form);`

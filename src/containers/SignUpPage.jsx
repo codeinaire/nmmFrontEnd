@@ -18,8 +18,8 @@ const DropdownWrapper = styled.div`
 
 const MotiveDropdown = styled.select.attrs({
   'aria-label': 'Choose a motivation',
-  id: 'name',
-  name: 'motive',
+  id: 'motivation',
+  name: 'motivation',
 })`
   background-color: #646fe2;
 `;
@@ -42,16 +42,32 @@ type MotivationObjectType = {
 }
 
 const SignUpPage = (props) => {
-
   function handleSubmit(event) {
     event.preventDefault();
+    console.log('this is event', event);
     const form = event.target;
+    console.log('this is form', form);
     const data = new FormData(form);
-    const formData = data.get('username');
+    console.log('this is data', data);
+    const formData = {
+      username: data.get('username'),
+      firstname: data.get('firstname'),
+      lastname: data.get('lastname'),
+      email: data.get('email'),
+      password: data.get('password'),
+      motive: data.get('motivation')
+    };
     // console.log('this is data', stringifyFormData(data));
     console.log('this is event', formData);
     props.mutate({
-      variables: { username: data.get('username') },
+      variables: {
+        username: data.get('username'),
+        firstname: data.get('firstname'),
+        lastname: data.get('lastname'),
+        email: data.get('email'),
+        password: data.get('password'),
+        motivation: data.get('motivation')
+      },
     });
   }
 
@@ -89,7 +105,7 @@ const SignUpPage = (props) => {
           ariaLabel="First name"
           labelFor="firstName"
           labelName="First name"
-          name="first-name"
+          name="firstname"
           placeholder="First Name"
           type="text"
         />
@@ -147,21 +163,32 @@ const SignUpPage = (props) => {
 // <Link to="/signin">
 // </Link>
 const submitSignupDetails = gql`
-  mutation submitSignupDetails($username: String!) {
-    submitSignupDetails(username: $username){
-      username
+  mutation submitSignupDetails(
+    $username: String!,
+    $firstname: String!,
+    $lastname: String!,
+    $email: String!,
+    $password: String!,
+    $motivation: String!
+  ) {
+    submitSignupDetails(
+      username: $username,
+      firstname: $firstname,
+      lastname: $lastname,
+      email: $email,
+      password: $password,
+      motivation: $motivation
+    ){
+      username,
+      firstname,
+      lastname,
+      email,
+      password,
+      motivation
     }
   }
 `;
 
 const SignUpPageRequest = graphql(submitSignupDetails)(SignUpPage);
-
-// function stringifyFormData(fd) {
-//   const data = {};
-// for (let key of fd.keys()) {
-//   data[key] = fd.get(key);
-//   }
-//   return JSON.stringify(data, null, 2);
-// }
 
 export default SignUpPageRequest;

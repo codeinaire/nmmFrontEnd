@@ -3,7 +3,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 const StyledLabel = styled.label.attrs({
-  for: props => props.labelFor,
+  htmlFor: props => props.labelFor,
 })`
   font-family: 'Lato','Helvetica Neue', 'Arial', 'Helvetica', sans-serif;
   margin: 0.5rem;
