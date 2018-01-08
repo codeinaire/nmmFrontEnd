@@ -44,21 +44,7 @@ type MotivationObjectType = {
 const SignUpPage = (props) => {
   function handleSubmit(event) {
     event.preventDefault();
-    console.log('this is event', event);
-    const form = event.target;
-    console.log('this is form', form);
-    const data = new FormData(form);
-    console.log('this is data', data);
-    const formData = {
-      username: data.get('username'),
-      firstname: data.get('firstname'),
-      lastname: data.get('lastname'),
-      email: data.get('email'),
-      password: data.get('password'),
-      motive: data.get('motivation')
-    };
-    // console.log('this is data', stringifyFormData(data));
-    console.log('this is event', formData);
+    const data = new FormData(event.target);
     props.mutate({
       variables: {
         username: data.get('username'),
@@ -66,8 +52,12 @@ const SignUpPage = (props) => {
         lastname: data.get('lastname'),
         email: data.get('email'),
         password: data.get('password'),
-        motivation: data.get('motivation')
+        motivation: data.get('motivation'),
       },
+    }).then((response) => {
+        console.log('got data', response);
+    }).catch((error) => {
+        console.log('there was an error sending the query', error);
     });
   }
 

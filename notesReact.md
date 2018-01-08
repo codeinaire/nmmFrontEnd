@@ -40,3 +40,7 @@ function stringifyFormData(fd) {
 }
 ```
 With the form data coming from this: `const data = new FormData(form);`
+
+# PROBLEMS
+
+### Babel-eslint - I was having a `type undefined error`, it  was solved by [this](https://github.com/eslint/eslint/issues/9767). Basically just `$ npm i babel-eslint@8.1.1`.
