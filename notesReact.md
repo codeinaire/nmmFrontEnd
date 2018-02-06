@@ -41,6 +41,14 @@ function stringifyFormData(fd) {
 ```
 With the form data coming from this: `const data = new FormData(form);`
 
+# NOTES
+
+## Security
+
+### Hashing client side
+
+I read a [good post on SO security](https://security.stackexchange.com/questions/8596/https-security-should-password-be-hashed-server-side-or-client-side) about the pointlessness in hashing client side. Basically, it is done if the server may be perceived as dangerous. A HTTPS tunnel is basically enough to secure from a MITM attack.
+
 # PROBLEMS
 
 ### Babel-eslint - I was having a `type undefined error`, it  was solved by [this](https://github.com/eslint/eslint/issues/9767). Basically just `$ npm i babel-eslint@8.1.1`.

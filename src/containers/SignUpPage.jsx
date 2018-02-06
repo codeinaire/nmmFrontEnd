@@ -1,9 +1,8 @@
 // @flow
 import React from 'react';
+import axios from 'axios';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import gql from 'graphql-tag';
-import { graphql } from 'react-apollo';
 // might need to reconsider importing this from another file as it's important for responsiveness and may need to be in this file
 import { StyledFlex } from './SplashPage';
 import Button from '../sharedPresentational/SharedButton';
@@ -39,26 +38,31 @@ const StyledLabel = styled.label`
 
 type MotivationObjectType = {
   motivation: string,
-}
+};
 
-const SignUpPage = (props) => {
+const SignUpPage = () => {
   function handleSubmit(event) {
     event.preventDefault();
     const data = new FormData(event.target);
-    props.mutate({
-      variables: {
-        username: data.get('username'),
-        firstname: data.get('firstname'),
-        lastname: data.get('lastname'),
-        email: data.get('email'),
-        password: data.get('password'),
-        motivation: data.get('motivation'),
-      },
-    }).then((response) => {
+    const url = 'http://localhost:3001/signup';
+    const dataToSend = {
+      username: data.get('username'),
+      firstname: data.get('firstname'),
+      lastname: data.get('lastname'),
+      email: data.get('email'),
+      password: data.get('password'),
+      motivation: data.get('motivation'),
+    };
+    axios({
+      method: 'post',
+      url,
+      data: dataToSend,
+    })
+      .then((response) => {
         console.log('got data', response);
-    }).catch((error) => {
+      }).catch((error) => {
         console.log('there was an error sending the query', error);
-    });
+      });
   }
 
   const motiveToJoin = [
@@ -140,11 +144,11 @@ const SignUpPage = (props) => {
               ))}
           </MotiveDropdown>
         </DropdownWrapper>
-        <Button
-          title="Let's Get Started"
-          size="1"
-          margin="5"
-        />
+          <Button
+            title="Let's Get Started"
+            size="1"
+            margin="5"
+          />
       </form>
     </StyledFlex>
   );
@@ -152,33 +156,5 @@ const SignUpPage = (props) => {
 
 // <Link to="/signin">
 // </Link>
-const submitSignupDetails = gql`
-  mutation submitSignupDetails(
-    $username: String!,
-    $firstname: String!,
-    $lastname: String!,
-    $email: String!,
-    $password: String!,
-    $motivation: String!
-  ) {
-    submitSignupDetails(
-      username: $username,
-      firstname: $firstname,
-      lastname: $lastname,
-      email: $email,
-      password: $password,
-      motivation: $motivation
-    ){
-      username,
-      firstname,
-      lastname,
-      email,
-      password,
-      motivation
-    }
-  }
-`;
 
-const SignUpPageRequest = graphql(submitSignupDetails)(SignUpPage);
-
-export default SignUpPageRequest;
+export default SignUpPage;
