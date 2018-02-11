@@ -46,7 +46,6 @@ const SignUpPage = () => {
     const data = new FormData(event.target);
     const url = 'http://localhost:3001/signup';
     const dataToSend = {
-      username: data.get('username'),
       firstname: data.get('firstname'),
       lastname: data.get('lastname'),
       email: data.get('email'),
@@ -87,14 +86,6 @@ const SignUpPage = () => {
         textColour="#fff"
       />
       <form onSubmit={handleSubmit}>
-        <InputField
-          ariaLabel="Username"
-          labelFor="userName"
-          labelName="Username"
-          name="username"
-          placeholder="Time to name the new you!"
-          type="text"
-        />
         <InputField
           ariaLabel="First name"
           labelFor="firstName"
