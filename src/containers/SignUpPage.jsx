@@ -2,15 +2,12 @@
 import React from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-import styled from 'styled-components';
 import { FormWithConstraints, FieldFeedback } from 'react-form-with-constraints';
 import { FieldFeedbacks, FormGroup, FormControlLabel, FormControlInput } from 'react-form-with-constraints-bootstrap4';
 // might need to reconsider importing this from another file as it's important for responsiveness and may need to be in this file
 import { StyledFlex } from './SplashPage';
-import Button from '../sharedPresentational/SharedButton';
 import NavBar from '../sharedPresentational/SharedNavBar';
 import TextBox from '../sharedPresentational/SharedTextBox';
-import InputField from '../sharedPresentational/SharedInputField';
 
 type MotivationObjectType = {
   motivation: string,
@@ -20,9 +17,13 @@ class SignUpPage extends React.Component {
   constructor() {
     super();
     this.state = {
+      firstName: '',
+      lastName: '',
+      email: '',
       password: '',
       passwordConfirm: '',
       submitButtonDisabled: false,
+      emptyForm: false,
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -35,17 +36,22 @@ class SignUpPage extends React.Component {
 
     this.form.validateFields();
 
+
     const data = new FormData(e.target);
     const url = 'http://localhost:3001/signup';
     const dataToSend = {
-      firstname: data.get('first-name'),
-      lastname: data.get('last-name'),
+      firstname: data.get('firstName'),
+      lastname: data.get('lastName'),
       email: data.get('email'),
       password: data.get('password'),
       motivation: data.get('motivation'),
     };
 
-    axios({
+    if (!dataToSend.firstname || !dataToSend.lastname || !dataToSend.email || !dataToSend.password) {
+      return this.setState({ emptyForm: true });
+    }
+
+    return axios({
       method: 'post',
       url,
       data: dataToSend,
@@ -68,7 +74,7 @@ class SignUpPage extends React.Component {
   }
 
   handlePasswordChange(e) {
-    this.form.validateFields('passwordConfirm');
+    this.form.validateFields('password');
 
     this.handleChange(e);
   }
@@ -81,6 +87,15 @@ class SignUpPage extends React.Component {
       { health: 'Personal Health' },
       { all: 'All of the Above' },
     ];
+
+    const AlertEmptyForm = this.state.emptyForm ? (
+      <div className="alert alert-danger alert-dismissible fade show" role="alert">
+        <strong>Holy Cow!</strong> Seems you've left a few fields empty. Fill them in to continue.
+        <button type="button" className="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>) :
+      null;
 
     return (
       <StyledFlex >
@@ -95,37 +110,42 @@ class SignUpPage extends React.Component {
           backgroundcolour="#fbbd08"
           textColour="#fff"
         />
+        {AlertEmptyForm}
         <FormWithConstraints
           ref={formWithConstraints => this.form = formWithConstraints}
           onSubmit={this.handleSubmit}
           noValidate
         >
-          <FormGroup for="first-name">
-            <FormControlLabel htmlFor="first-name">First Name</FormControlLabel>
+          <FormGroup for="firstName">
+            <FormControlLabel htmlFor="firstName">First Name</FormControlLabel>
             <FormControlInput
               ariaLabel="first name"
               id="first-name"
-              name="first-name"
+              name="firstName"
+              onChange={this.handleChange}
               placeholder="First Name"
               required
+              value={this.state.firstName}
               type="text"
             />
-            <FieldFeedbacks for="first-name" className="invalid-feedback">
+            <FieldFeedbacks for="firstName" className="invalid-feedback">
               <FieldFeedback when="valueMissing" />
             </FieldFeedbacks>
           </FormGroup>
 
-          <FormGroup for="last-name">
-            <FormControlLabel htmlFor="last-name">Last Name</FormControlLabel>
+          <FormGroup for="lastName">
+            <FormControlLabel htmlFor="lastName">Last Name</FormControlLabel>
             <FormControlInput
               ariaLabel="last name"
               id="last-name"
-              name="last-name"
+              name="lastName"
+              onChange={this.handleChange}
               placeholder="Last Name"
               required
+              value={this.state.lastName}
               type="text"
             />
-            <FieldFeedbacks for="last-name" className="invalid-feedback">
+            <FieldFeedbacks for="lastName" className="invalid-feedback">
               <FieldFeedback when="valueMissing" />
             </FieldFeedbacks>
           </FormGroup>
@@ -136,8 +156,10 @@ class SignUpPage extends React.Component {
               ariaLabel="email address"
               id="email"
               name="email"
+              onChange={this.handleChange}
               placeholder="Some way to contact you."
               required
+              value={this.state.email}
               type="email"
             />
             <FieldFeedbacks for="email" className="invalid-feedback">
@@ -168,8 +190,8 @@ class SignUpPage extends React.Component {
             </FieldFeedbacks>
           </FormGroup>
 
-          <FormGroup for="password-confirm">
-            <FormControlLabel htmlFor="password-confirm">Confirm Password</FormControlLabel>
+          <FormGroup for="passwordConfirm">
+            <FormControlLabel htmlFor="passwordConfirm">Confirm Password</FormControlLabel>
             <FormControlInput
               ariaLabel="password confirm"
               id="password-confirm"
@@ -204,12 +226,13 @@ class SignUpPage extends React.Component {
             </select>
           </div>
 
-          <Button
-            title="Let's Get Started"
-            size="1"
-            margin="5"
+          <button
+            className="btn btn-lg btn-warning"
+            type="submit"
             disabled={this.state.submitButtonDisabled}
-          />
+          >
+          Let's Get Started
+          </button>
         </FormWithConstraints>
       </StyledFlex>
     );

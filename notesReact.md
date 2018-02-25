@@ -48,6 +48,7 @@ With the form data coming from this: `const data = new FormData(form);`
 - [ReactFormValidation](https://moduscreate.com/blog/reactjs-form-validation-approaches/)
 - [Use this for validation](https://github.com/tkrotoff/react-form-with-constraints) and [bootstrap4 version]()
   - NOTE: I had to change the `Bootstrap4.js` file to get it compatible with the latest bootstrap. It was a simple change that I followed from [here](https://github.com/tkrotoff/react-form-with-constraints/pull/18/commits/d191f8bfbd0420128d8c81edc700e5620a604598). The file I changed is in the `react-form-with-constraints-bootstrap4/lib/Bootstrap4.js`. It is kind of annoying cause the creator wouldn't merge a PR to update it to use BS4, the PR author made it backwards compatible as well.
+- [A way to do](https://learnetto.com/blog/how-to-do-simple-form-validation-in-reactjs) it differently. The module I'm currently using is inspire from this.
 
 # NOTES
 

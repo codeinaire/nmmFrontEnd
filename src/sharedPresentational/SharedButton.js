@@ -22,6 +22,7 @@ const Button = styled.button`
 `;
 
 type Props = {
+  disabled: boolean,
   title: string,
   size: string,
   leftRightMargin: string,
@@ -30,6 +31,7 @@ type Props = {
 
 const SharedButton = (props: Props) => (
   <Button
+    disabled={props.disabled || null}
     leftRightMargin={props.leftRightMargin || 0}
     size={props.size}
     topBotMargin={props.topBotMargin || 0}
