@@ -18,7 +18,9 @@ const SharedNavBar = () => (
     <Link to="/signin">
       <LinkedButton title="Sign In" leftRightMargin="1" />
     </Link>
-    <LinkedButton title="I'm a linked button 2" leftRightMargin="1" />
+    <Link to="/">
+      <LinkedButton title="I'm a linked button 2" leftRightMargin="1" />
+    </Link>
   </StyledNav>
 );
 

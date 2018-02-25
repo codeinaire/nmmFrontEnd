@@ -1,7 +1,7 @@
 // @flow
 import React from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import { FormWithConstraints, FieldFeedback } from 'react-form-with-constraints';
 import { FieldFeedbacks, FormGroup, FormControlLabel, FormControlInput } from 'react-form-with-constraints-bootstrap4';
 // might need to reconsider importing this from another file as it's important for responsiveness and may need to be in this file
@@ -24,6 +24,7 @@ class SignUpPage extends React.Component {
       passwordConfirm: '',
       submitButtonDisabled: false,
       emptyForm: false,
+      redirect: false,
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -51,7 +52,7 @@ class SignUpPage extends React.Component {
       return this.setState({ emptyForm: true });
     }
 
-    return axios({
+    axios({
       method: 'post',
       url,
       data: dataToSend,
@@ -60,6 +61,8 @@ class SignUpPage extends React.Component {
     }).catch((error) => {
       console.log('there was an error sending the query', error);
     });
+
+    this.setState({ redirect: true });
   }
 
   handleChange(e) {
@@ -97,8 +100,11 @@ class SignUpPage extends React.Component {
       </div>) :
       null;
 
+    const Redirection = this.state.redirect ? (<Redirect to="/signin" />) : null;
+
     return (
       <StyledFlex >
+        {Redirection}
         <NavBar />
         <TextBox
           size="3"
@@ -125,8 +131,8 @@ class SignUpPage extends React.Component {
               onChange={this.handleChange}
               placeholder="First Name"
               required
-              value={this.state.firstName}
               type="text"
+              value={this.state.firstName}
             />
             <FieldFeedbacks for="firstName" className="invalid-feedback">
               <FieldFeedback when="valueMissing" />
@@ -142,8 +148,8 @@ class SignUpPage extends React.Component {
               onChange={this.handleChange}
               placeholder="Last Name"
               required
-              value={this.state.lastName}
               type="text"
+              value={this.state.lastName}
             />
             <FieldFeedbacks for="lastName" className="invalid-feedback">
               <FieldFeedback when="valueMissing" />
@@ -159,8 +165,8 @@ class SignUpPage extends React.Component {
               onChange={this.handleChange}
               placeholder="Some way to contact you."
               required
-              value={this.state.email}
               type="email"
+              value={this.state.email}
             />
             <FieldFeedbacks for="email" className="invalid-feedback">
               <FieldFeedback when="valueMissing" />
@@ -197,6 +203,7 @@ class SignUpPage extends React.Component {
               id="password-confirm"
               name="passwordConfirm"
               onChange={this.handleChange}
+              required
               type="password"
               value={this.state.passwordConfirm}
             />
