@@ -20,7 +20,8 @@
     "react/prefer-stateless-function": 0,
     "compat/compat": 2,
     "no-mixed-operators": 0,
-    "react/no-array-index-key": 0
+    "react/no-array-index-key": 0,
+    "jsx-a11y/label-has-for": 1,
   },
   "env": {
     "browser": true,

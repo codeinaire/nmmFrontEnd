@@ -1,6 +1,7 @@
 // @flow
 import React from 'react';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 import LinkedButton from './SharedButton';
 
 const StyledNav = styled.nav`
@@ -13,8 +14,10 @@ const StyledNav = styled.nav`
 `;
 
 const SharedNavBar = () => (
-  <StyledNav >
-    <LinkedButton title="I'm a linked button 1" leftRightMargin="1" />
+  <StyledNav className="navbar" >
+    <Link to="/signin">
+      <LinkedButton title="Sign In" leftRightMargin="1" />
+    </Link>
     <LinkedButton title="I'm a linked button 2" leftRightMargin="1" />
   </StyledNav>
 );

@@ -31,14 +31,26 @@ class SplashPage extends Component {
           size="3"
           text="No Meat May"
         />
-        <div>
-          {splashPagePictures.map((picture: string) =>
-              (<Picture
-                source={picture}
-                alt="this is a fish"
-                height="250px"
-                width="250px"
-              />))}
+        <div className="card-group">
+          {splashPagePictures.map((picture: string, index: number) =>
+              (<div className="card">
+                <Picture
+                  key={index}
+                  source={picture}
+                  alt="this is a fish"
+                  height="250px"
+                  width="250px"
+                />
+                <div className="card-body">
+                  <h5 className="card-title">
+                    This is a Fish
+                  </h5>
+                  <p className="card-text">
+                    This is the text of the body for a fish.
+                  </p>
+                </div>
+              </div>
+            ))}
         </div>
         <Link to="/signup">
           <Button

@@ -3,7 +3,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 const StyledLabel = styled.label.attrs({
-  for: props => props.labelFor,
+  htmlFor: props => props.labelFor,
 })`
   font-family: 'Lato','Helvetica Neue', 'Arial', 'Helvetica', sans-serif;
   margin: 0.5rem;
@@ -17,42 +17,42 @@ const StyledInput = styled.input.attrs({
   name: props => props.name,
   type: props => props.type,
 })`
-  background-color: #646fe2;
-  border: none;
-  border-radius: 3px;
-  color: #fff;
-  display: inline-block;
   font-family: 'Lato','Helvetica Neue', 'Arial', 'Helvetica', sans-serif;
-  font-size: 1rem;
-  margin: 0.5rem;
-  min-height: 1rem;
-  padding: .75rem 1.5rem .75rem .5rem;
+  margin: 0.5rem 0.5rem 0;
 `;
 
 type PropsType = {
   ariaLabel: string,
+  innerRef: () => {},
   labelFor: string,
   labelName: string,
   name: string,
+  onChange: () => {},
+  pattern: string,
   placeholder: string,
   type: string,
+  value: () => {},
 }
 
 const SharedInputField = (props: PropsType) => (
-  <div>
-    <StyledLabel
-      labelFor={props.labelFor}
-    >
-      <span>{props.labelName}:</span>
-      <StyledInput
-        ariaLabel={props.ariaLabel}
-        id={props.labelFor}
-        name={props.name}
-        placeholder={props.placeholder}
-        type={props.type}
-      />
-    </StyledLabel>
-  </div>
+  <StyledLabel
+    labelFor={props.labelFor}
+  >
+    <span>{props.labelName}:</span>
+    <StyledInput
+      ariaLabel={props.ariaLabel}
+      className="form-control"
+      id={props.labelFor}
+      innerRef={props.innerRef || null}
+      name={props.name}
+      onChange={props.onChange || null}
+      pattern={props.pattern || null}
+      placeholder={props.placeholder}
+      type={props.type}
+      value={props.value || null}
+      required
+    />
+  </StyledLabel>
 );
 
 export default SharedInputField;
