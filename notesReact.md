@@ -25,6 +25,8 @@ https://www.peterbe.com/plog/4-different-kinds-of-react-component-styles
 
 - [Best way to get key out of object](https://stackoverflow.com/questions/6268679/best-way-to-get-the-key-of-a-key-value-javascript-object)
 
+- [Bootstrap 4](https://getbootstrap.com/docs/4.0/getting-started/introduction/)
+
 # HELP
 
 
@@ -40,6 +42,12 @@ function stringifyFormData(fd) {
 }
 ```
 With the form data coming from this: `const data = new FormData(form);`
+
+### Validation of form data
+
+- [ReactFormValidation](https://moduscreate.com/blog/reactjs-form-validation-approaches/)
+- [Use this for validation](https://github.com/tkrotoff/react-form-with-constraints) and [bootstrap4 version]()
+  - NOTE: I had to change the `Bootstrap4.js` file to get it compatible with the latest bootstrap. It was a simple change that I followed from [here](https://github.com/tkrotoff/react-form-with-constraints/pull/18/commits/d191f8bfbd0420128d8c81edc700e5620a604598). The file I changed is in the `react-form-with-constraints-bootstrap4/lib/Bootstrap4.js`. It is kind of annoying cause the creator wouldn't merge a PR to update it to use BS4, the PR author made it backwards compatible as well.
 
 # NOTES
 

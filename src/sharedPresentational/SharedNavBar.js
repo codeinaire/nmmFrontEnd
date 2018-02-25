@@ -14,7 +14,7 @@ const StyledNav = styled.nav`
 `;
 
 const SharedNavBar = () => (
-  <StyledNav >
+  <StyledNav className="navbar" >
     <Link to="/signin">
       <LinkedButton title="Sign In" leftRightMargin="1" />
     </Link>

@@ -17,6 +17,7 @@ type PropsType = {
 
 const SharedPicture = (props: PropsType) => (
   <StyledImage
+    className="card-img-top"
     src={props.source}
     alt={props.alt}
     height={props.height}
