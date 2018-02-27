@@ -189,10 +189,10 @@ class SignUpPage extends React.Component {
             <FieldFeedbacks for="password" show="all" className="invalid-feedback">
               <FieldFeedback when="valueMissing" />
               <FieldFeedback when="patternMismatch">Should be at least 5 characters long</FieldFeedback>
-              <FieldFeedback when={value => !/\d/.test(value)} warning>Should contain numbers</FieldFeedback>
-              <FieldFeedback when={value => !/[a-z]/.test(value)} warning>Should contain small letters</FieldFeedback>
-              <FieldFeedback when={value => !/[A-Z]/.test(value)} warning>Should contain capital letters</FieldFeedback>
-              <FieldFeedback when={value => !/\W/.test(value)} warning>Should contain special characters</FieldFeedback>
+              <FieldFeedback when={value => !/\d/.test(value)} >Should contain numbers</FieldFeedback>
+              <FieldFeedback when={value => !/[a-z]/.test(value)} >Should contain small letters</FieldFeedback>
+              <FieldFeedback when={value => !/[A-Z]/.test(value)} >Should contain capital letters</FieldFeedback>
+              <FieldFeedback when={value => !/\W/.test(value)} >Should contain special characters</FieldFeedback>
             </FieldFeedbacks>
           </FormGroup>
 

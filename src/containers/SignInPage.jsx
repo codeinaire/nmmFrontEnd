@@ -51,12 +51,12 @@ class SignInPage extends React.Component {
     this.props.mutate({
       variables: dataToSend,
     }).then((response) => {
-        console.log('got data', response);
-    }).catch((error) => {
-        console.error('there was an error sending the query', error.networkError.response.status);
-        if (error.networkError.response.status === 511) {
-          return this.setState({ invalidCreds: true });
-        }
+      console.log('got data', response);
+    }).catch((err) => {
+      console.error('there was an error sending the query', err.networkError.response.status);
+      if (err.networkError.response.status === 511) {
+        return this.setState({ invalidCreds: true });
+      }
     });
   }
 
@@ -119,11 +119,12 @@ class SignInPage extends React.Component {
               onChange={this.handleChange}
               placeholder="Enter your email."
               required
-              type="text"
+              type="email"
               value={this.state.email}
             />
             <FieldFeedbacks for="email" className="invalid-feedback">
               <FieldFeedback when="valueMissing" />
+              <FieldFeedback when="*" />
             </FieldFeedbacks>
           </FormGroup>
 
@@ -140,7 +141,7 @@ class SignInPage extends React.Component {
               value={this.state.password}
             />
             <FieldFeedbacks for="password" className="invalid-feedback">
-              <FieldFeedback when="valueMissing" />
+              <FieldFeedback when="valueMissing" warning />
             </FieldFeedbacks>
           </FormGroup>
 
