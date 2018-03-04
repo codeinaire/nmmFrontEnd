@@ -2,15 +2,16 @@
 import React from 'react';
 import gql from 'graphql-tag';
 import { graphql } from 'react-apollo';
+import { Redirect, Switch } from 'react-router-dom';
 import { FormWithConstraints, FieldFeedback } from 'react-form-with-constraints';
 import { FieldFeedbacks, FormGroup, FormControlLabel, FormControlInput } from 'react-form-with-constraints-bootstrap4';
-// import { Link } from 'react-router-dom';
 import { StyledFlex } from './SplashPage';
 import NavBar from '../sharedPresentational/SharedNavBar';
 import TextBox from '../sharedPresentational/SharedTextBox';
 
 type PropsType = {
-  mutate: () => {};
+  mutate: () => {},
+  usernameCall: () => {},
 };
 
 class SignInPage extends React.Component {
@@ -18,11 +19,13 @@ class SignInPage extends React.Component {
     super(props: PropsType);
 
     this.state = {
-      email: '',
-      password: '',
-      emptyForm: false,
-      submitButtonDisabled: false,
       invalidCreds: false,
+      email: '',
+      emptyForm: false,
+      password: '',
+      redirect: '',
+      submitButtonDisabled: false,
+      username: '',
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -52,6 +55,11 @@ class SignInPage extends React.Component {
       variables: dataToSend,
     }).then((response) => {
       console.log('got data', response);
+      this.setState({
+        redirect: true,
+        username: response.data.signInUser.username,
+      });
+      this.props.usernameCall(response.data.signInUser.username);
     }).catch((err) => {
       console.error('there was an error sending the query', err.networkError.response.status);
       if (err.networkError.response.status === 511) {
@@ -90,8 +98,16 @@ class SignInPage extends React.Component {
       </div>) :
       null;
 
+    const Redirection = this.state.redirect ? (
+      <Switch>
+        <Redirect from="/signin" to={`/profile/${this.state.username}`} />
+      </Switch>
+    ) :
+      null;
+
     return (
       <StyledFlex >
+        {Redirection}
         <NavBar />
         <TextBox
           size="3"
@@ -160,17 +176,14 @@ class SignInPage extends React.Component {
 
 const submitSignInDetails = gql`
   mutation signInUser(
-    $username: String!,
+    $email: String,
     $password: String!,
   ) {
     signInUser (
-      username: $username,
+      email: $email,
       password: $password,
     ) {
-      username,
-      firstname,
-      lastname,
-      motivation,
+      username
     }
   }
 `;

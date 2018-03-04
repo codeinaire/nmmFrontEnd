@@ -17,8 +17,7 @@ class SignUpPage extends React.Component {
   constructor() {
     super();
     this.state = {
-      firstName: '',
-      lastName: '',
+      username: '',
       email: '',
       password: '',
       passwordConfirm: '',
@@ -41,14 +40,13 @@ class SignUpPage extends React.Component {
     const data = new FormData(e.target);
     const url = 'http://localhost:3001/signup';
     const dataToSend = {
-      firstname: data.get('firstName'),
-      lastname: data.get('lastName'),
+      username: data.get('username'),
       email: data.get('email'),
       password: data.get('password'),
       motivation: data.get('motivation'),
     };
 
-    if (!dataToSend.firstname || !dataToSend.lastname || !dataToSend.email || !dataToSend.password) {
+    if (!dataToSend.username || !dataToSend.email || !dataToSend.password) {
       return this.setState({ emptyForm: true });
     }
 
@@ -122,36 +120,19 @@ class SignUpPage extends React.Component {
           onSubmit={this.handleSubmit}
           noValidate
         >
-          <FormGroup for="firstName">
-            <FormControlLabel htmlFor="firstName">First Name</FormControlLabel>
+          <FormGroup for="username">
+            <FormControlLabel htmlFor="username">Username</FormControlLabel>
             <FormControlInput
-              ariaLabel="first name"
-              id="first-name"
-              name="firstName"
+              ariaLabel="username"
+              id="username"
+              name="username"
               onChange={this.handleChange}
-              placeholder="First Name"
+              placeholder="Username"
               required
               type="text"
-              value={this.state.firstName}
+              value={this.state.username}
             />
-            <FieldFeedbacks for="firstName" className="invalid-feedback">
-              <FieldFeedback when="valueMissing" />
-            </FieldFeedbacks>
-          </FormGroup>
-
-          <FormGroup for="lastName">
-            <FormControlLabel htmlFor="lastName">Last Name</FormControlLabel>
-            <FormControlInput
-              ariaLabel="last name"
-              id="last-name"
-              name="lastName"
-              onChange={this.handleChange}
-              placeholder="Last Name"
-              required
-              type="text"
-              value={this.state.lastName}
-            />
-            <FieldFeedbacks for="lastName" className="invalid-feedback">
+            <FieldFeedbacks for="username" className="invalid-feedback">
               <FieldFeedback when="valueMissing" />
             </FieldFeedbacks>
           </FormGroup>
@@ -183,6 +164,7 @@ class SignUpPage extends React.Component {
               name="password"
               onChange={this.handlePasswordChange}
               pattern=".{5,}"
+              placeholder="Enter a password"
               required
               value={this.state.password}
             />
@@ -203,6 +185,7 @@ class SignUpPage extends React.Component {
               id="password-confirm"
               name="passwordConfirm"
               onChange={this.handleChange}
+              placeholder="Confirm password"
               required
               type="password"
               value={this.state.passwordConfirm}
@@ -245,8 +228,5 @@ class SignUpPage extends React.Component {
     );
   }
 }
-
-// <Link to="/signin">
-// </Link>
 
 export default SignUpPage;
