@@ -50,6 +50,10 @@ With the form data coming from this: `const data = new FormData(form);`
   - NOTE: I had to change the `Bootstrap4.js` file to get it compatible with the latest bootstrap. It was a simple change that I followed from [here](https://github.com/tkrotoff/react-form-with-constraints/pull/18/commits/d191f8bfbd0420128d8c81edc700e5620a604598). The file I changed is in the `react-form-with-constraints-bootstrap4/lib/Bootstrap4.js`. It is kind of annoying cause the creator wouldn't merge a PR to update it to use BS4, the PR author made it backwards compatible as well.
 - [A way to do](https://learnetto.com/blog/how-to-do-simple-form-validation-in-reactjs) it differently. The module I'm currently using is inspire from this.
 
+### Routing between pages
+
+- [React Router v4](https://reacttraining.com/react-router/web/example/auth-workflow) - this is what I'm to protect the pages from inauthentication. It's another layer of protection. I can probably use this for multiple protected pages. Just slot the PrivateRoute in and use different components.
+
 # NOTES
 
 ## Security

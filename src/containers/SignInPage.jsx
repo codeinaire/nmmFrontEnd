@@ -1,5 +1,5 @@
 // @flow
-import React from 'react';
+import React, { Component } from 'react';
 import gql from 'graphql-tag';
 import { graphql } from 'react-apollo';
 import { Redirect, Switch } from 'react-router-dom';
@@ -9,21 +9,31 @@ import { StyledFlex } from './SplashPage';
 import NavBar from '../sharedPresentational/SharedNavBar';
 import TextBox from '../sharedPresentational/SharedTextBox';
 
-type PropsType = {
-  mutate: () => {},
+type Props = {
   usernameCall: () => {},
+  mutate: () => {}
 };
 
-class SignInPage extends React.Component {
-  constructor(props: PropsType) {
-    super(props: PropsType);
+type State = {
+  invalidCreds: boolean,
+  email: string,
+  emptyForm: boolean,
+  password: string,
+  redirect: boolean,
+  submitButtonDisabled: boolean,
+  username: string,
+}
+
+class SignInPage extends Component<Props, State> {
+  constructor(props) {
+    super(props);
 
     this.state = {
       invalidCreds: false,
       email: '',
       emptyForm: false,
       password: '',
-      redirect: '',
+      redirect: false,
       submitButtonDisabled: false,
       username: '',
     };
