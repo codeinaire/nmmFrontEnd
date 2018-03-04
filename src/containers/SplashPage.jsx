@@ -26,7 +26,7 @@ class SplashPage extends Component {
 
     return (
       <StyledFlex >
-        <NavBar />
+        <NavBar signInSignOut />
         <TextBox
           size="3"
           text="No Meat May"

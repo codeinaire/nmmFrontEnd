@@ -1,7 +1,7 @@
 // @flow
 import React from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import { FormWithConstraints, FieldFeedback } from 'react-form-with-constraints';
 import { FieldFeedbacks, FormGroup, FormControlLabel, FormControlInput } from 'react-form-with-constraints-bootstrap4';
 // might need to reconsider importing this from another file as it's important for responsiveness and may need to be in this file
@@ -17,13 +17,13 @@ class SignUpPage extends React.Component {
   constructor() {
     super();
     this.state = {
-      firstName: '',
-      lastName: '',
+      username: '',
       email: '',
       password: '',
       passwordConfirm: '',
       submitButtonDisabled: false,
       emptyForm: false,
+      redirect: false,
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -40,18 +40,17 @@ class SignUpPage extends React.Component {
     const data = new FormData(e.target);
     const url = 'http://localhost:3001/signup';
     const dataToSend = {
-      firstname: data.get('firstName'),
-      lastname: data.get('lastName'),
+      username: data.get('username'),
       email: data.get('email'),
       password: data.get('password'),
       motivation: data.get('motivation'),
     };
 
-    if (!dataToSend.firstname || !dataToSend.lastname || !dataToSend.email || !dataToSend.password) {
+    if (!dataToSend.username || !dataToSend.email || !dataToSend.password) {
       return this.setState({ emptyForm: true });
     }
 
-    return axios({
+    axios({
       method: 'post',
       url,
       data: dataToSend,
@@ -60,6 +59,8 @@ class SignUpPage extends React.Component {
     }).catch((error) => {
       console.log('there was an error sending the query', error);
     });
+
+    this.setState({ redirect: true });
   }
 
   handleChange(e) {
@@ -97,8 +98,11 @@ class SignUpPage extends React.Component {
       </div>) :
       null;
 
+    const Redirection = this.state.redirect ? (<Redirect to="/signin" />) : null;
+
     return (
       <StyledFlex >
+        {Redirection}
         <NavBar />
         <TextBox
           size="3"
@@ -116,36 +120,19 @@ class SignUpPage extends React.Component {
           onSubmit={this.handleSubmit}
           noValidate
         >
-          <FormGroup for="firstName">
-            <FormControlLabel htmlFor="firstName">First Name</FormControlLabel>
+          <FormGroup for="username">
+            <FormControlLabel htmlFor="username">Username</FormControlLabel>
             <FormControlInput
-              ariaLabel="first name"
-              id="first-name"
-              name="firstName"
+              ariaLabel="username"
+              id="username"
+              name="username"
               onChange={this.handleChange}
-              placeholder="First Name"
+              placeholder="Username"
               required
-              value={this.state.firstName}
               type="text"
+              value={this.state.username}
             />
-            <FieldFeedbacks for="firstName" className="invalid-feedback">
-              <FieldFeedback when="valueMissing" />
-            </FieldFeedbacks>
-          </FormGroup>
-
-          <FormGroup for="lastName">
-            <FormControlLabel htmlFor="lastName">Last Name</FormControlLabel>
-            <FormControlInput
-              ariaLabel="last name"
-              id="last-name"
-              name="lastName"
-              onChange={this.handleChange}
-              placeholder="Last Name"
-              required
-              value={this.state.lastName}
-              type="text"
-            />
-            <FieldFeedbacks for="lastName" className="invalid-feedback">
+            <FieldFeedbacks for="username" className="invalid-feedback">
               <FieldFeedback when="valueMissing" />
             </FieldFeedbacks>
           </FormGroup>
@@ -159,8 +146,8 @@ class SignUpPage extends React.Component {
               onChange={this.handleChange}
               placeholder="Some way to contact you."
               required
-              value={this.state.email}
               type="email"
+              value={this.state.email}
             />
             <FieldFeedbacks for="email" className="invalid-feedback">
               <FieldFeedback when="valueMissing" />
@@ -177,16 +164,17 @@ class SignUpPage extends React.Component {
               name="password"
               onChange={this.handlePasswordChange}
               pattern=".{5,}"
+              placeholder="Enter a password"
               required
               value={this.state.password}
             />
             <FieldFeedbacks for="password" show="all" className="invalid-feedback">
               <FieldFeedback when="valueMissing" />
               <FieldFeedback when="patternMismatch">Should be at least 5 characters long</FieldFeedback>
-              <FieldFeedback when={value => !/\d/.test(value)} warning>Should contain numbers</FieldFeedback>
-              <FieldFeedback when={value => !/[a-z]/.test(value)} warning>Should contain small letters</FieldFeedback>
-              <FieldFeedback when={value => !/[A-Z]/.test(value)} warning>Should contain capital letters</FieldFeedback>
-              <FieldFeedback when={value => !/\W/.test(value)} warning>Should contain special characters</FieldFeedback>
+              <FieldFeedback when={value => !/\d/.test(value)} >Should contain numbers</FieldFeedback>
+              <FieldFeedback when={value => !/[a-z]/.test(value)} >Should contain small letters</FieldFeedback>
+              <FieldFeedback when={value => !/[A-Z]/.test(value)} >Should contain capital letters</FieldFeedback>
+              <FieldFeedback when={value => !/\W/.test(value)} >Should contain special characters</FieldFeedback>
             </FieldFeedbacks>
           </FormGroup>
 
@@ -197,6 +185,8 @@ class SignUpPage extends React.Component {
               id="password-confirm"
               name="passwordConfirm"
               onChange={this.handleChange}
+              placeholder="Confirm password"
+              required
               type="password"
               value={this.state.passwordConfirm}
             />
@@ -238,8 +228,5 @@ class SignUpPage extends React.Component {
     );
   }
 }
-
-// <Link to="/signin">
-// </Link>
 
 export default SignUpPage;

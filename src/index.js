@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { ApolloProvider } from 'react-apollo';
+import { BrowserRouter as Router } from 'react-router-dom';
 import styled from 'styled-components';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
@@ -14,7 +15,9 @@ const AppStyled = styled(App)`
 
 ReactDOM.render(
   <ApolloProvider client={ApolloClient}>
-    <AppStyled />
+    <Router >
+      <AppStyled />
+    </Router>
   </ApolloProvider>,
   document.getElementById('root'),
 );

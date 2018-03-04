@@ -1,14 +1,15 @@
 // Apollo client - this is the centre of the apps interactions with Graphql server.
 import { ApolloClient } from 'apollo-client';
-import { HttpLink } from 'apollo-link-http';
+import { createHttpLink } from 'apollo-link-http';
 import { setContext } from 'apollo-link-context';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 
 
 const hostURL = 'http://localhost:3001/graphql';
 
-const httpLink = new HttpLink({
+const httpLink = createHttpLink({
   uri: hostURL,
+  credentials: 'same-origin',
 });
 
 // const authLink = setContext((_, { headers }) => {
