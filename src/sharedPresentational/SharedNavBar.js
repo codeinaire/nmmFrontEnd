@@ -32,7 +32,7 @@ const SharedNavBar = (props) => {
   return (
     <StyledNav className="navbar" >
       {SignInSignOut}
-      <Link to="/profile">
+      <Link to="/profile/:username">
         <LinkedButton title="Profile Page" leftRightMargin="1" />
       </Link>
     </StyledNav>
