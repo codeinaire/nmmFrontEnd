@@ -36,7 +36,8 @@ class App extends React.Component<State> {
           this.state.isAuthenticated ? (
             <Component
               {...props}
-              username={this.state.username}/>
+              username={this.state.username}
+            />
       ) : (
         <Redirect to="/signin" />
       )}
@@ -53,7 +54,9 @@ class App extends React.Component<State> {
             <SignInPage usernameCall={this.usernameCall} />
           )}
         />
-        <PrivateRoute path="/profile/:username" component={ProfilePage} />
+        {// to make private again replace Route with PrivateRoute
+        }
+        <Route path="/profile" component={ProfilePage} />
       </Switch>
     );
   }

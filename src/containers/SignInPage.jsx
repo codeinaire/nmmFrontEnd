@@ -64,12 +64,11 @@ class SignInPage extends Component<Props, State> {
     this.props.mutate({
       variables: dataToSend,
     }).then((response) => {
-      console.log('got data', response);
+      this.props.usernameCall(response.data.signInUser.username);
       this.setState({
         redirect: true,
         username: response.data.signInUser.username,
       });
-      this.props.usernameCall(response.data.signInUser.username);
     }).catch((err) => {
       console.error('there was an error sending the query', err.networkError.response.status);
       if (err.networkError.response.status === 511) {

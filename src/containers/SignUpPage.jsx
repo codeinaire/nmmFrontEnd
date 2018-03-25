@@ -57,7 +57,7 @@ class SignUpPage extends React.Component {
     }).then((response) => {
       console.log('got data', response);
     }).catch((error) => {
-      console.log('there was an error sending the query', error);
+      console.error('there was an error sending the query', error);
     });
 
     this.setState({ redirect: true });
