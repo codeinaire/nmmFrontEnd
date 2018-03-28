@@ -50,6 +50,10 @@ With the form data coming from this: `const data = new FormData(form);`
   - NOTE: I had to change the `Bootstrap4.js` file to get it compatible with the latest bootstrap. It was a simple change that I followed from [here](https://github.com/tkrotoff/react-form-with-constraints/pull/18/commits/d191f8bfbd0420128d8c81edc700e5620a604598). The file I changed is in the `react-form-with-constraints-bootstrap4/lib/Bootstrap4.js`. It is kind of annoying cause the creator wouldn't merge a PR to update it to use BS4, the PR author made it backwards compatible as well.
 - [A way to do](https://learnetto.com/blog/how-to-do-simple-form-validation-in-reactjs) it differently. The module I'm currently using is inspire from this.
 
+### Extra formy stuff
+
+- How to create a [text area with a form](https://stackoverflow.com/questions/18432376/what-does-for-attribute-do-in-html-label-tag#18432439).
+
 ### Routing between pages
 
 - [React Router v4](https://reacttraining.com/react-router/web/example/auth-workflow) - this is what I'm to protect the pages from inauthentication. It's another layer of protection. I can probably use this for multiple protected pages. Just slot the PrivateRoute in and use different components.
@@ -79,3 +83,5 @@ I was having an annoying problem with the redirection after signin. Originally I
 # SOLVED
 
 ### Cookie - I was finally able to get the cookie to save into local storage by add this: `var corsOptions = {origin: 'http://localhost:3000',credentials: true // <-- REQUIRED backend setting };` to the cors function in the server and `credentials: 'include'`, to the Apollo client.
+
+### Textarea - I had an issue with `<textarea>`. When I transitioned to the `<textarea>` input it would refresh into a while screen. I thought it had something to do with it doing a post request or someting to do with the form, but there was not nextwork requests but a get. I tried it loading first and it gave me something like `<textarea> can only have one child` error. It has something to do with there being multiple blocks of text in the form of a JS block and regular text. Once the JS block was taken out it was okay. It doesn't like any children in the text area. The `value` property will override any children.
