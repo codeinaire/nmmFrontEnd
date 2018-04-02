@@ -65,7 +65,7 @@ const UPDATE_PROFILE = gql`
 
 const GET_PROFILE = gql`
   {
-    profile {
+    getProfile {
       motivation
       bio
     }
@@ -123,28 +123,33 @@ class ProfilePage extends React.Component {
 
   updateState(data) {
     this.setState({
-      bioText: data.profile[0].bio,
-      motivationText: data.profile[0].motivation,
+      bioText: data.getProfile[0].bio,
+      motivationText: data.getProfile[0].motivation,
     });
   }
 
   render() {
     const textareaSectionNames = ['bioText', 'motivationText'];
-    const textareaSections = this.state.editProfile ? textareaSectionNames.map(value => (
-      <div className="form-group">
-        <textarea
-          className="form-control"
-          id={value}
-          maxLength="160"
-          name={value}
-          placeholder="Tell us a bit about yourself"
-          required
-          rows="5"
-          defaultValue={this.state[`${value}`]}
-          spellCheck
-          wrap="soft"
-        />
-      </div>)) : textareaSectionNames.map(value => (<p className="card-body" id={value}>{this.state[`${value}`]}</p>));
+    const textareaSections = this.state.editProfile ? textareaSectionNames.map(value => (data) => {
+      return (
+        <div className="form-group">
+          <textarea
+            className="form-control"
+            id={value}
+            maxLength="160"
+            name={value}
+            placeholder="Tell us a bit about yourself"
+            required
+            rows="5"
+            defaultValue={data}
+            spellCheck
+            wrap="soft"
+          />
+        </div>
+      );
+    }) : textareaSectionNames.map(value => (data) => {
+      return <p className="card-body" id={value}>{data}</p>
+    });
     const nameInput = this.state.editProfile ? (
       <div className="input-group">
         <input
@@ -174,6 +179,16 @@ class ProfilePage extends React.Component {
       <div>
         <NavBar />
         <GridSpace>
+        <Query query={GET_PROFILE}>
+          {({ loading, error, data }) => {
+          if (loading) return (<p>Loading...</p>);
+          if (error) return (<p>Error: </p>);
+          console.log('this is data', data);
+          if (!data.getProfile) {
+            this.updateState(data);
+          }
+
+          return (
           <Mutation mutation={UPDATE_PROFILE}>
             {(updateProfile, { loadingMutation, errorMutation }) => {
               console.log('this is test', updateProfile);
@@ -203,7 +218,7 @@ class ProfilePage extends React.Component {
                             Bio
                           </div>
                           <div className="card-body">
-                            {textareaSections[0]}
+                            {textareaSections[0](data.getProfile.bio)}
                           </div>
                         </div>
                       </GridItemC>
@@ -213,7 +228,7 @@ class ProfilePage extends React.Component {
                             Motivation
                           </div>
                           <div className="card-body">
-                            {textareaSections[1]}
+                            {textareaSections[1](data.getProfile.motivation)}
                           </div>
                         </div>
                       </GridItemD>
@@ -235,7 +250,9 @@ class ProfilePage extends React.Component {
                 </div>
               );
             }}
-          </Mutation>
+          </Mutation>);
+                    }}
+          </Query>
           <Button
             onClick={this.editProfile}
           >
