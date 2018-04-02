@@ -76,12 +76,13 @@ I was having an annoying problem with the redirection after signin. Originally I
 
 # PROBLEMS
 
-### Babel-eslint - I was having a `type undefined error`, it  was solved by [this](https://github.com/eslint/eslint/issues/9767). Basically just `$ npm i babel-eslint@8.1.1`.
-
-### Login - there may be an issue when logging in the first time. It doesn't log in the first time I start up the application. Well, it logs in, but it will not redirect it to the profile page.
 
 # SOLVED
 
 ### Cookie - I was finally able to get the cookie to save into local storage by add this: `var corsOptions = {origin: 'http://localhost:3000',credentials: true // <-- REQUIRED backend setting };` to the cors function in the server and `credentials: 'include'`, to the Apollo client.
 
 ### Textarea - I had an issue with `<textarea>`. When I transitioned to the `<textarea>` input it would refresh into a while screen. I thought it had something to do with it doing a post request or someting to do with the form, but there was not nextwork requests but a get. I tried it loading first and it gave me something like `<textarea> can only have one child` error. It has something to do with there being multiple blocks of text in the form of a JS block and regular text. Once the JS block was taken out it was okay. It doesn't like any children in the text area. The `value` property will override any children.
+
+### Login - there may be an issue when logging in the first time. It doesn't log in the first time I start up the application. Well, it logs in, but it will not redirect it to the profile page. `Refer to react router redirection issues`.
+
+### Babel-eslint - I was having a `type undefined error`, it  was solved by [this](https://github.com/eslint/eslint/issues/9767). Basically just `$ npm i babel-eslint@8.1.1`.

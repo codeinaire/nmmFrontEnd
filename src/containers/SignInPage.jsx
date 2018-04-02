@@ -24,6 +24,21 @@ type State = {
   username: string,
 }
 
+
+const submitSignInDetails = gql`
+  mutation signInUser(
+    $email: String!,
+    $password: String!,
+  ) {
+    signInUser (
+      email: $email,
+      password: $password,
+    ) {
+      username
+    }
+  }
+`;
+
 class SignInPage extends Component<Props, State> {
   constructor(props) {
     super(props);
@@ -182,20 +197,6 @@ class SignInPage extends Component<Props, State> {
     );
   }
 }
-
-const submitSignInDetails = gql`
-  mutation signInUser(
-    $email: String,
-    $password: String!,
-  ) {
-    signInUser (
-      email: $email,
-      password: $password,
-    ) {
-      username
-    }
-  }
-`;
 
 const SignInPageRequest = graphql(submitSignInDetails)(SignInPage);
 
