@@ -16,10 +16,10 @@ const StyledNav = styled.nav`
 `;
 
 const SharedNavBar = (props) => {
-  const SignInSignOut = props.signInSignOut ? (
+  const SignInSignOut = props.isAuthenticated ? (
     <div>
       <Link to="/signin">
-        <LinkedButton title="Sign In" leftRightMargin="1" />
+        <LinkedButton title="Sign Out" leftRightMargin="1" />
       </Link>
     </div>
   ) : (
@@ -32,8 +32,11 @@ const SharedNavBar = (props) => {
   return (
     <StyledNav className="navbar" >
       {SignInSignOut}
-      <Link to="/profile/:username">
-        <LinkedButton title="Profile Page" leftRightMargin="1" />
+      <Link to={`/profile/${props.username}`} >
+        <LinkedButton
+          title="Profile Page"
+          leftRightMargin="1"
+        />
       </Link>
     </StyledNav>
   );

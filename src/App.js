@@ -36,6 +36,8 @@ class App extends React.Component<State> {
           this.state.isAuthenticated ? (
             <Component
               {...props}
+              isAuthenticated={this.state.isAuthenticated}
+              usernameCall={this.usernameCall}
               username={this.state.username}
             />
       ) : (
@@ -46,17 +48,40 @@ class App extends React.Component<State> {
 
     return (
       <Switch >
-        <Route exact path="/" component={SplashPage} />
-        <Route path="/signup" component={SignUpPage} />
+        <Route
+          exact
+          path="/"
+          render={() => (
+            <SplashPage
+              isAuthenticated={this.state.isAuthenticated}
+              usernameCall={this.usernameCall}
+              username={this.state.username}
+            />
+          )}
+        />
+        <Route
+          path="/signup"
+          render={() => (
+            <SignUpPage
+              isAuthenticated={this.state.isAuthenticated}
+              usernameCall={this.usernameCall}
+              username={this.state.username}
+            />
+          )}
+        />
         <Route
           path="/signin"
           render={() => (
-            <SignInPage usernameCall={this.usernameCall} />
+            <SignInPage
+              isAuthenticated={this.state.isAuthenticated}
+              usernameCall={this.usernameCall}
+              username={this.state.username}
+            />
           )}
         />
         {// to make private again replace Route with PrivateRoute
         }
-        <Route path="/profile" component={ProfilePage} />
+        <PrivateRoute path="/profile" component={ProfilePage} />
       </Switch>
     );
   }

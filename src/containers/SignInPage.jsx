@@ -132,7 +132,10 @@ class SignInPage extends Component<Props, State> {
     return (
       <StyledFlex >
         {Redirection}
-        <NavBar />
+        <NavBar
+          isAuthenticated={this.props.isAuthenticated}
+          username={this.props.username}
+        />
         <TextBox
           size="3"
           text="No Meat May"

@@ -26,7 +26,10 @@ class SplashPage extends Component {
 
     return (
       <StyledFlex >
-        <NavBar signInSignOut />
+        <NavBar
+          isAuthenticated={this.props.isAuthenticated}
+          username={this.props.username}
+         />
         <TextBox
           size="3"
           text="No Meat May"

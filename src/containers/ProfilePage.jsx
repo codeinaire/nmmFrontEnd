@@ -177,7 +177,10 @@ class ProfilePage extends React.Component {
     ) : null;
     return (
       <div>
-        <NavBar />
+        <NavBar
+          isAuthenticated={this.props.isAuthenticated}
+          username={this.props.username}
+         />
         <GridSpace>
         <Query query={GET_PROFILE}>
           {({ loading, error, data }) => {
