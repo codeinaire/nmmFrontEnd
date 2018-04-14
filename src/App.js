@@ -19,12 +19,20 @@ class App extends React.Component<State> {
       isAuthenticated: false,
     };
     this.usernameCall = this.usernameCall.bind(this);
+    this.userSignOut = this.userSignOut.bind(this);
   }
 
   usernameCall(username: string): string {
     this.setState({
       username,
       isAuthenticated: true,
+    });
+  }
+
+  userSignOut(): null {
+    this.setState({
+      isAuthenticated: false,
+      username: '',
     });
   }
 
@@ -39,6 +47,7 @@ class App extends React.Component<State> {
               isAuthenticated={this.state.isAuthenticated}
               usernameCall={this.usernameCall}
               username={this.state.username}
+              userSignOut={this.userSignOut}
             />
       ) : (
         <Redirect to="/signin" />

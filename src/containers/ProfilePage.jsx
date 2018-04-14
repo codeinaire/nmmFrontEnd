@@ -180,6 +180,7 @@ class ProfilePage extends React.Component {
         <NavBar
           isAuthenticated={this.props.isAuthenticated}
           username={this.props.username}
+          userSignOut={this.props.userSignOut}
          />
         <GridSpace>
         <Query query={GET_PROFILE}>

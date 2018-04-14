@@ -1,5 +1,6 @@
 // @flow
 import React from 'react';
+import axios from 'axios';
 import styled from 'styled-components';
 import gql from 'graphql-tag';
 import { graphql } from 'react-apollo';
@@ -16,10 +17,31 @@ const StyledNav = styled.nav`
 `;
 
 const SharedNavBar = (props) => {
+  const handleSubmit = () => {
+    console.log('this is sign out handleSubmit');
+
+    const url = 'http://localhost:3001/signout';
+
+    axios({
+      method: 'get',
+      url,
+    }).then((response) => {
+      console.log('got data', response);
+      props.userSignOut();
+    }).catch((error) => {
+      console.error('there was an error sending the query', error);
+    });
+  }
+
   const SignInSignOut = props.isAuthenticated ? (
     <div>
       <Link to="/signin">
-        <LinkedButton title="Sign Out" leftRightMargin="1" />
+        <button
+          className="btn btn-lg btn-warning"
+          onClick={handleSubmit}
+        >
+        Sign Out
+        </button>
       </Link>
     </div>
   ) : (
